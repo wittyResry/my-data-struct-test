@@ -14,8 +14,19 @@ public class StackImplTest {
     @Test
     public void push() {
         Stack<Integer> stack = new StackImpl<Integer>();
-        stack.push(10);
-        Assert.assertEquals("test", new Integer(10), stack.pop());
+        int pushSum = 0;
+        for (int i = 0; i < 10000; ++i) {
+            stack.push(i);
+            pushSum += i;
+        }
+        int popSum = 0;
+        for (int i = 0; i < 10001; ++i) {
+            Integer val = stack.pop();
+            if (val != null) {
+                popSum += val;
+            }
+        }
+        Assert.assertEquals("test", pushSum, popSum);
     }
 
     @Test
